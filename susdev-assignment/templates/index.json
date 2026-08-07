@@ -42,6 +42,14 @@
         "ticker_item_4"
       ]
     },
+    "purelane_header": {
+      "type": "purelane-header",
+      "settings": {
+        "brand_name": "Purelane",
+        "tagline": "Clean, simply",
+        "menu": "main-menu"
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -112,6 +120,7 @@
   },
   "order": [
     "purelane_ticker",
+    "purelane_header",
     "image_banner",
     "featured_collection"
   ]
