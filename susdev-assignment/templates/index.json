@@ -63,6 +63,73 @@
         "secondary_btn_link": "#how"
       }
     },
+    "purelane_review_marquee": {
+      "type": "purelane-review-marquee",
+      "settings": {
+        "kicker": "That's what they said",
+        "stars": "★★★★★",
+        "rating_score": "4.8",
+        "rating_text": "from 8,000+ reviews",
+        "social_proof_prefix": "Loved by",
+        "social_proof_highlight": "12 lakh+",
+        "social_proof_suffix": "homes",
+        "speed": 52
+      },
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "title": "Works like a charm",
+            "body": "Finally an eco option that cleans as well as the chemical detergent I used for years, and it smells better.",
+            "author": "Anita",
+            "product_category": "Laundry detergent"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "title": "Best dishwash ever",
+            "body": "Our old dishwash left my help with dry, cracked skin. That stopped completely after we switched.",
+            "author": "Priya",
+            "product_category": "Dishwash gel"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "title": "Great product, great packaging",
+            "body": "Very soft on hands with a lovely fragrance, and it feels good to be using far less plastic.",
+            "author": "Sunita",
+            "product_category": "Liquid handwash"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "title": "Dog friendly",
+            "body": "We switched because chemical floor cleaners were setting off my dog's allergies. No reactions since.",
+            "author": "Rohit S.",
+            "product_category": "Floor cleaner"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "title": "Sparkling taps again",
+            "body": "Hard water had ruined our bathroom fittings. Two sprays and the scale wipes straight off, no scrubbing.",
+            "author": "Verified buyer",
+            "product_category": "Tap cleaner"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5"
+      ]
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -135,6 +202,7 @@
     "purelane_ticker",
     "purelane_header",
     "purelane_hero",
+    "purelane_review_marquee",
     "image_banner",
     "featured_collection"
   ]
