@@ -1,0 +1,143 @@
+{%- comment -%}
+  Purelane — Background Scenes Snippet (F1)
+  Sunlit Mint Water Background with animated SVG caustics, floating bubbles, and vignette overlay.
+{%- endcomment -%}
+
+{%- style -%}
+  .scenes{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:#eee7fb}
+  .scene{position:absolute;inset:0;opacity:0;transition:opacity 1.5s ease}
+  .scene.on{opacity:1}
+  .s1{background:linear-gradient(178deg,#fbfffb 0%,#eafaec 24%,#d6f1dc 54%,#bfe8ca 100%)}
+  .s2{background:linear-gradient(178deg,#f6fdf7 0%,#e3f7e7 26%,#cbedd4 58%,#b2e2c2 100%)}
+  .s3{background:linear-gradient(178deg,#f0fbf2 0%,#d9f2df 28%,#bde6c8 60%,#a2d9b6 100%)}
+  .s4{background:linear-gradient(178deg,#e9f8ec 0%,#cdedd6 30%,#addcbe 62%,#8ecdaa 100%)}
+
+  .water{position:absolute;inset:-14% -10%;pointer-events:none;transition:opacity 1.2s ease}
+  .wl{position:absolute;inset:0;will-change:transform;translate:var(--px,0) var(--py,0)}
+  .wl .sv{width:100%;height:100%}
+  .wl-a{mix-blend-mode:soft-light;opacity:1;animation:drift-a 34s linear infinite}
+  .wl-a .sv{filter:contrast(1.25)}
+  .wl-b{mix-blend-mode:overlay;opacity:.66;animation:drift-b 23s linear infinite}
+  .wl-c{mix-blend-mode:overlay;opacity:.6;animation:shaft-sway 19s ease-in-out infinite}
+  .wl-s{mix-blend-mode:overlay;opacity:.72;animation:surface 11s ease-in-out infinite;transform-origin:50% 0}
+  @keyframes drift-a{
+    0%{transform:translate3d(-3%,0,0) scale(1.06)}
+    50%{transform:translate3d(3%,-1.6%,0) scale(1.13)}
+    100%{transform:translate3d(-3%,0,0) scale(1.06)}
+  }
+  @keyframes drift-b{
+    0%{transform:translate3d(4%,1%,0) scale(1.1)}
+    50%{transform:translate3d(-4%,-1%,0) scale(1.04)}
+    100%{transform:translate3d(4%,1%,0) scale(1.1)}
+  }
+  @keyframes shaft-sway{
+    0%{transform:translate3d(-2%,0,0) skewX(0deg);opacity:.34}
+    50%{transform:translate3d(2%,0,0) skewX(2.4deg);opacity:.6}
+    100%{transform:translate3d(-2%,0,0) skewX(0deg);opacity:.34}
+  }
+  @keyframes surface{
+    0%{transform:translateY(0) scaleY(1);opacity:.55}
+    50%{transform:translateY(-1.4%) scaleY(1.14);opacity:.82}
+    100%{transform:translateY(0) scaleY(1);opacity:.55}
+  }
+  .scenes[data-d="1"] .water{opacity:1}
+  .scenes[data-d="2"] .water{opacity:.9}
+  .scenes[data-d="3"] .water{opacity:.76}
+  .scenes[data-d="4"] .water{opacity:.58}
+
+  .bub{position:absolute;inset:0;overflow:hidden}
+  .bub span{position:absolute;bottom:-6%;left:var(--x);width:var(--s);height:var(--s);border-radius:50%;
+    border:1px solid rgba(75,58,143,.26);background:radial-gradient(circle at 34% 30%,rgba(255,255,255,.9),rgba(255,255,255,0) 64%);
+    animation:rise var(--dur) linear infinite;animation-delay:var(--dly);opacity:0}
+  @keyframes rise{
+    0%{transform:translate3d(0,0,0);opacity:0}
+    12%{opacity:.7}
+    88%{opacity:.5}
+    100%{transform:translate3d(var(--drift),-116vh,0);opacity:0}
+  }
+
+  .vig{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(126% 88% at 50% 26%,transparent 42%,rgba(75,58,143,.07) 80%,rgba(0,80,74,.16) 100%),
+               linear-gradient(180deg,rgba(255,255,255,.40) 0%,transparent 20%,transparent 70%,rgba(0,84,78,.10) 100%)}
+{%- endstyle -%}
+
+<div class="scenes" id="scenes" data-d="1">
+  <div class="scene s1 on"></div>
+  <div class="scene s2"></div>
+  <div class="scene s3"></div>
+  <div class="scene s4"></div>
+
+  <div class="water" id="water">
+    <div class="wl wl-a"><svg class="sv" viewBox="0 0 1800 1100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<linearGradient id="cg" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#eafff4" stop-opacity="0"/>
+<stop offset=".18" stop-color="#f2fff8" stop-opacity=".95"/>
+<stop offset=".5" stop-color="#ffffff" stop-opacity="1"/>
+<stop offset=".82" stop-color="#e6fbef" stop-opacity=".9"/>
+<stop offset="1" stop-color="#eafff4" stop-opacity="0"/></linearGradient>
+<filter id="wf" x="-12%" y="-12%" width="124%" height="124%" color-interpolation-filters="sRGB">
+<feTurbulence type="fractalNoise" baseFrequency="0.0022 0.019" numOctaves="3" seed="21" result="n"/>
+<feDisplacementMap in="SourceGraphic" in2="n" scale="72" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+<filter id="wf2" x="-12%" y="-12%" width="124%" height="124%" color-interpolation-filters="sRGB">
+<feTurbulence type="fractalNoise" baseFrequency="0.005 0.031" numOctaves="2" seed="47" result="n"/>
+<feDisplacementMap in="SourceGraphic" in2="n" scale="46" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+</defs><g filter="url(#wf)"><path d="M262 230 Q372 261 482 238 Q592 247 702 250 Q812 210 923 235 Q1033 201 1143 213 Q1253 232 1363 215 Q1473 261 1583 238 Q1694 248 1804 250 Q1914 211 2024 236 Q2134 201 2244 214" stroke="url(#cg)" stroke-width="1.7" fill="none" opacity="0.45" stroke-linecap="round"/><path d="M137 256 Q307 242 477 258 Q646 238 816 245 Q985 259 1155 247 Q1324 277 1494 262 Q1664 267 1833 269 Q2003 243 2172 259 Q2342 237 2512 245" stroke="url(#cg)" stroke-width="5.1" fill="none" opacity="0.23" stroke-linecap="round"/><path d="M389 715 Q514 756 639 725 Q763 738 888 742 Q1013 688 1138 721 Q1262 674 1387 692 Q1512 716 1636 694 Q1761 756 1886 724 Q2010 739 2135 742 Q2260 689 2385 722" stroke="url(#cg)" stroke-width="5.7" fill="none" opacity="0.37" stroke-linecap="round"/><path d="M140 308 Q297 310 454 302 Q611 321 769 312 Q926 314 1083 316 Q1240 298 1397 309 Q1555 295 1712 300 Q1869 309 2026 301 Q2184 321 2341 311" stroke="url(#cg)" stroke-width="5.5" fill="none" opacity="0.47" stroke-linecap="round"/><path d="M570 422 Q687 462 805 437 Q922 436 1039 446 Q1156 391 1274 423 Q1391 388 1508 398 Q1625 432 1742 406 Q1860 462 1977 436 Q2094 438 2211 447 Q2329 391 2446 423 Q2563 387 2680 398 Q2798 430 2915 405" stroke="url(#cg)" stroke-width="2.3" fill="none" opacity="0.25" stroke-linecap="round"/></g></svg></div>
+    <div class="wl wl-b"><svg class="sv" viewBox="0 0 1800 1100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<linearGradient id="cg" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#eafff4" stop-opacity="0"/>
+<stop offset=".18" stop-color="#f2fff8" stop-opacity=".95"/>
+<stop offset=".5" stop-color="#ffffff" stop-opacity="1"/>
+<stop offset=".82" stop-color="#e6fbef" stop-opacity=".9"/>
+<stop offset="1" stop-color="#eafff4" stop-opacity="0"/></linearGradient>
+</defs><g filter="url(#wf2)"><path d="M355 217 Q442 234 529 234 Q616 202 703 222 Q790 190 877 203 Q964 215 1051 202 Q1138 242 1225 221 Q1312 235 1399 234 Q1486 202 1573 223" stroke="url(#cg)" stroke-width="3.4" fill="none" opacity="0.17" stroke-linecap="round"/><path d="M160 723 Q278 720 396 713 Q514 738 633 725 Q751 735 869 734 Q987 715 1105 728 Q1223 706 1341 715 Q1459 720 1577 713" stroke="url(#cg)" stroke-width="1.1" fill="none" opacity="0.17" stroke-linecap="round"/></g></svg></div>
+    <div class="wl wl-c"><svg class="sv" viewBox="0 0 1800 1100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#f4fff9" stop-opacity=".85"/>
+<stop offset=".38" stop-color="#dcf6e7" stop-opacity=".28"/>
+<stop offset="1" stop-color="#d4f2e2" stop-opacity="0"/></linearGradient>
+</defs><g><polygon points="95,-80 152,-80 517,1180 439,1180" fill="url(#sg)" opacity="0.26"/><polygon points="433,-80 491,-80 885,1180 807,1180" fill="url(#sg)" opacity="0.41"/><polygon points="751,-80 919,-80 1180,1180 953,1180" fill="url(#sg)" opacity="0.31"/><polygon points="1048,-80 1135,-80 1400,1180 1282,1180" fill="url(#sg)" opacity="0.28"/></g></svg></div>
+    <div class="wl wl-s"><svg class="sv" viewBox="0 0 1800 1100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<linearGradient id="sf" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#ffffff" stop-opacity=".55"/>
+<stop offset=".55" stop-color="#e8fff2" stop-opacity=".16"/>
+<stop offset="1" stop-color="#e8fff2" stop-opacity="0"/></linearGradient>
+<filter id="sfw" x="-10%" y="-40%" width="120%" height="180%" color-interpolation-filters="sRGB">
+<feTurbulence type="fractalNoise" baseFrequency="0.004 0.05" numOctaves="2" seed="9" result="n"/>
+<feDisplacementMap in="SourceGraphic" in2="n" scale="30" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+</defs><g filter="url(#sfw)"><rect x="-100" y="-40" width="2000" height="150" fill="url(#sf)"/><rect x="-100" y="60" width="2000" height="60" fill="url(#sf)" opacity=".5"/></g></svg></div>
+    <div class="bub"><span style="--x:91.9%;--s:6.7px;--dur:21.5s;--dly:19.0s;--drift:-11px"></span><span style="--x:43.4%;--s:5.7px;--dur:26.8s;--dly:16.1s;--drift:-11px"></span><span style="--x:96.6%;--s:6.2px;--dur:13.7s;--dly:10.3s;--drift:38px"></span><span style="--x:6.0%;--s:3.6px;--dur:24.4s;--dly:10.6s;--drift:3px"></span><span style="--x:70.3%;--s:3.3px;--dur:20.9s;--dly:9.2s;--drift:-39px"></span><span style="--x:67.7%;--s:4.0px;--dur:27.0s;--dly:16.5s;--drift:-5px"></span><span style="--x:2.1%;--s:7.1px;--dur:22.0s;--dly:3.1s;--drift:-37px"></span><span style="--x:69.4%;--s:8.1px;--dur:21.9s;--dly:10.7s;--drift:-24px"></span></div>
+  </div>
+
+  <div class="vig"></div>
+</div>
+
+<script>
+  (function() {
+    var scenes = document.getElementById('scenes');
+    if (scenes) {
+      var scEls = [].slice.call(scenes.querySelectorAll('.scene'));
+      function updateScene() {
+        var secs = [].slice.call(document.querySelectorAll('[data-scene]'));
+        var top = window.scrollY || window.pageYOffset;
+        var mid = top + window.innerHeight * 0.45;
+        var current = 1;
+        secs.forEach(function (sec) {
+          var rect = sec.getBoundingClientRect();
+          var secTop = rect.top + top;
+          if (mid >= secTop) {
+            current = parseInt(sec.getAttribute('data-scene') || '1', 10);
+          }
+        });
+        scEls.forEach(function (el, idx) {
+          el.classList.toggle('on', idx + 1 === current);
+        });
+        scenes.setAttribute('data-d', String(current));
+      }
+      window.addEventListener('scroll', updateScene, { passive: true });
+      updateScene();
+    }
+  })();
+</script>

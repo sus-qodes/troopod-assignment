@@ -130,6 +130,150 @@
         "review_5"
       ]
     },
+    "purelane_ingredients": {
+      "type": "purelane-ingredients",
+      "settings": {
+        "title": "Sourced from nature"
+      },
+      "blocks": {
+        "ingredient_1": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Coconut",
+            "description": "Plant-derived cleansers that lift grease"
+          }
+        },
+        "ingredient_2": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Orange peel",
+            "description": "Natural degreaser and fresh citrus lift"
+          }
+        },
+        "ingredient_3": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Soap nut",
+            "description": "A traditional plant foaming agent"
+          }
+        },
+        "ingredient_4": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Neem",
+            "description": "Time-tested antibacterial from the tree"
+          }
+        },
+        "ingredient_5": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Lemongrass",
+            "description": "Clean fragrance with nothing synthetic"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_1",
+        "ingredient_2",
+        "ingredient_3",
+        "ingredient_4",
+        "ingredient_5"
+      ]
+    },
+    "purelane_why_it_works": {
+      "type": "purelane-why-it-works",
+      "settings": {
+        "kicker": "Why it works",
+        "heading": "Tough on grime. Gentle on everything else.",
+        "description": "Every formula is built on plant-derived cleansers and essential oils. It behaves exactly like the cleaner you are used to, minus the things you never signed up for.",
+        "btn_label": "See the ingredient list",
+        "btn_link": "#ingredients"
+      },
+      "blocks": {
+        "pillar_1": {
+          "type": "pillar",
+          "settings": {
+            "title": "Less scrubbing",
+            "description": "A foaming formulation. The foam clings to grease and lifts it, so you wipe instead of scrub.",
+            "link_text": "Learn more",
+            "link": "#shop"
+          }
+        },
+        "pillar_2": {
+          "type": "pillar",
+          "settings": {
+            "title": "Clean ingredients",
+            "description": "No sulphates, no chlorine, no synthetic fragrance. Nothing on the label you would not want near your food.",
+            "link_text": "Learn more",
+            "link": "#ingredients"
+          }
+        },
+        "pillar_3": {
+          "type": "pillar",
+          "settings": {
+            "title": "Safe around everyone",
+            "description": "Gentle on hands, safe around kids and pets, and it leaves no toxic residue on the surfaces you touch every day.",
+            "link_text": "Learn more",
+            "link": "#proof"
+          }
+        },
+        "rotator_1": {
+          "type": "rotator_item",
+          "settings": { "title": "Kitchen cleaner", "subtitle": "Foam lifts grease, no scrubbing", "product_class": "p-kitchen" }
+        },
+        "rotator_2": {
+          "type": "rotator_item",
+          "settings": { "title": "Tap & limescale", "subtitle": "Melts hard water stains", "product_class": "p-tap" }
+        },
+        "rotator_3": {
+          "type": "rotator_item",
+          "settings": { "title": "Laundry detergent", "subtitle": "Tough on odour, soft on fabric", "product_class": "p-laundry" }
+        },
+        "rotator_4": {
+          "type": "rotator_item",
+          "settings": { "title": "Toilet cleaner", "subtitle": "Kills 99.9% of germs", "product_class": "p-toilet" }
+        },
+        "rotator_5": {
+          "type": "rotator_item",
+          "settings": { "title": "Floor cleaner", "subtitle": "Neem powered, pet safe", "product_class": "p-floor" }
+        },
+        "rotator_6": {
+          "type": "rotator_item",
+          "settings": { "title": "Dishwash gel", "subtitle": "Cuts grease, kind to hands", "product_class": "p-dish" }
+        },
+        "stat_1": {
+          "type": "stat",
+          "settings": { "value": "99.9%", "title": "Germ kill", "description": "Tested against germs and bacteria" }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": { "value": "0%", "title": "Sulphates", "description": "No SLS, chlorine or parabens" }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": { "value": "100%", "title": "Plant based", "description": "Cleansers derived from plants" }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": { "value": "4.8", "title": "Rated", "description": "Across 8,000+ verified reviews" }
+        }
+      },
+      "block_order": [
+        "pillar_1",
+        "pillar_2",
+        "pillar_3",
+        "rotator_1",
+        "rotator_2",
+        "rotator_3",
+        "rotator_4",
+        "rotator_5",
+        "rotator_6",
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4"
+      ]
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -203,6 +347,8 @@
     "purelane_header",
     "purelane_hero",
     "purelane_review_marquee",
+    "purelane_ingredients",
+    "purelane_why_it_works",
     "image_banner",
     "featured_collection"
   ]
