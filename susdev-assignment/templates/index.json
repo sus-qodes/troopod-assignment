@@ -316,7 +316,6 @@
             "saving_text": "You save ₹448",
             "subtitle_1": "Removes tough stains & odour",
             "class_1": "p-laundry",
-            "show_tile_2": true,
             "subtitle_2": "Softens & freshens every wash",
             "subtitle_3": "Deep-cleans your machine",
             "class_3": "p-wm"
@@ -404,9 +403,7 @@
             "compare_at_price": "₹598",
             "per_product_note": "Flat ₹174 per product",
             "bullet_1": "Pick any two products",
-            "bullet_2": "Free shipping across India",
-            "class_1": "p-tap",
-            "class_2": "p-kitchen"
+            "bullet_2": "Free shipping across India"
           }
         },
         "tier_2": {
@@ -421,10 +418,7 @@
             "per_product_note": "Flat ₹166 per product",
             "bullet_1": "Pick any three products",
             "bullet_2": "Covers kitchen and laundry",
-            "bullet_3": "Free shipping across India",
-            "class_1": "p-kitchen",
-            "class_2": "p-tap",
-            "class_3": "p-dish"
+            "bullet_3": "Free shipping across India"
           }
         },
         "tier_3": {
@@ -439,12 +433,7 @@
             "per_product_note": "Flat ₹160 per product",
             "bullet_1": "Pick any five products",
             "bullet_2": "Every room in one order",
-            "bullet_3": "Free shipping across India",
-            "class_1": "p-kitchen",
-            "class_2": "p-tap",
-            "class_3": "p-floor",
-            "class_4": "p-toilet",
-            "class_5": "p-laundry"
+            "bullet_3": "Free shipping across India"
           }
         }
       },
@@ -466,63 +455,7 @@
         "wb_heading": "Why bundles beat buying single",
         "cats_kicker": "Bundle categories",
         "cats_heading": "Find the right bundle for you"
-      },
-      "blocks": {
-        "card_1": {
-          "type": "product_card",
-          "settings": {
-            "badge": "Best seller",
-            "title": "Tap cleaner & limescale remover",
-            "reviews": "237 reviews",
-            "price": "₹200",
-            "compare_price": "₹299",
-            "discount_tag": "33% off",
-            "class": "p-tap"
-          }
-        },
-        "card_2": {
-          "type": "product_card",
-          "settings": {
-            "badge": "Best seller",
-            "title": "Kitchen cleaner, foaming",
-            "reviews": "254 reviews",
-            "price": "₹200",
-            "compare_price": "₹299",
-            "discount_tag": "33% off",
-            "class": "p-kitchen"
-          }
-        },
-        "card_3": {
-          "type": "product_card",
-          "settings": {
-            "badge": "Top rated",
-            "title": "Copper, bronze & brass cleaner",
-            "reviews": "231 reviews",
-            "price": "₹200",
-            "compare_price": "₹299",
-            "discount_tag": "33% off",
-            "class": "p-metal"
-          }
-        },
-        "card_4": {
-          "type": "product_card",
-          "settings": {
-            "badge": "New",
-            "title": "Washing machine cleaner & descaler",
-            "reviews": "183 reviews",
-            "price": "₹200",
-            "compare_price": "₹299",
-            "discount_tag": "33% off",
-            "class": "p-wm"
-          }
-        }
-      },
-      "block_order": [
-        "card_1",
-        "card_2",
-        "card_3",
-        "card_4"
-      ]
+      }
     },
     "purelane_trust": {
       "type": "purelane-trust",
