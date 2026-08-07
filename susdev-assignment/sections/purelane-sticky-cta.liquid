@@ -1,0 +1,63 @@
+{%- comment -%}
+  Purelane — Sticky Mobile CTA Bar Section
+  Fixed bottom banner on mobile screens encouraging bundle purchase.
+{%- endcomment -%}
+
+{%- style -%}
+  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:48;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(255,255,255,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid rgba(75,58,143,.14);
+    display:flex;align-items:center;gap:12px;box-shadow:0 -6px 20px rgba(0,74,66,.12)}
+  .sticky .lbl{line-height:1.2}
+  .sticky .lbl b{display:block;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--surface)}
+  .sticky .lbl span{font-size:10.5px;color:var(--paper-3)}
+  .sticky .btn{margin-left:auto}
+  @media(min-width:960px){.sticky{display:none}}
+{%- endstyle -%}
+
+<div class="sticky" id="stickyCta" {{ section.shopify_attributes }}>
+  <div class="lbl">
+    <b>{{ section.settings.title | default: "Build your box" }}</b>
+    <span>{{ section.settings.subtitle | default: "Flat prices, free shipping" }}</span>
+  </div>
+  <a class="btn btn-primary btn-sm" href="{{ section.settings.btn_link | default: "#combos" }}">
+    {{ section.settings.btn_label | default: "Shop now" }}
+  </a>
+</div>
+
+{% schema %}
+{
+  "name": "Sticky Mobile CTA Bar",
+  "tag": "section",
+  "class": "section-purelane-sticky-cta",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Build your box"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Flat prices, free shipping"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sticky Mobile CTA Bar"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,156 @@
+{%- comment -%}
+  Purelane — Footer Section
+  Includes brand column, 3 navigation menus, copyright row, and legal links.
+{%- endcomment -%}
+
+{%- style -%}
+  footer{padding:48px 0 32px;border-top:1px solid rgba(75,58,143,.12);margin-top:40px}
+  .fgrid{display:grid;gap:32px;grid-template-columns:1fr;margin-bottom:36px}
+  @media(min-width:760px){.fgrid{grid-template-columns:1.4fr 1fr 1fr 1fr}}
+  .fcol h5{font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--surface);margin-bottom:14px}
+  .fcol a{display:block;font-size:13px;color:var(--paper-2);text-decoration:none;margin-bottom:9px;transition:color .3s var(--ease)}
+  .fcol a:hover{color:#00706a}
+  .fcol p{font-size:12.5px;color:var(--paper-2);line-height:1.55}
+  .fbot{display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(75,58,143,.10);font-size:12px;color:var(--paper-3)}
+  @media(min-width:600px){.fbot{flex-direction:row}}
+{%- endstyle -%}
+
+<footer data-scene="4" id="footer" {{ section.shopify_attributes }}>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fcol">
+        <a class="brand" href="#top" style="margin-bottom:16px">
+          <span class="mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#b8701c"><path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/><path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/><path d="M12 21v-6"/></svg>
+          </span>
+          <span class="txt"><span class="n1">{{ section.settings.brand_name | default: "Purelane" }}</span><span class="n2">{{ section.settings.brand_tagline | default: "Clean, simply" }}</span></span>
+        </a>
+        <p style="max-width:30ch">{{ section.settings.brand_bio | default: "Effective cleaning, powered by nature. Made for Indian homes since day one." }}</p>
+      </div>
+
+      <div class="fcol">
+        <h5>{{ section.settings.col1_heading | default: "Shop" }}</h5>
+        {%- if section.settings.col1_menu != blank -%}
+          {%- for link in linklists[section.settings.col1_menu].links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="#shop">Bestsellers</a>
+          <a href="#shop">Kitchen</a>
+          <a href="#shop">Laundry</a>
+          <a href="#shop">Home</a>
+          <a href="#shop">Skin</a>
+          <a href="#bundles">Starter kits</a>
+        {%- endif -%}
+      </div>
+
+      <div class="fcol">
+        <h5>{{ section.settings.col2_heading | default: "About" }}</h5>
+        {%- if section.settings.col2_menu != blank -%}
+          {%- for link in linklists[section.settings.col2_menu].links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="#how">Why plant-based</a>
+          <a href="#ingredients">Our ingredients</a>
+          <a href="#proof">Our proof</a>
+          <a href="#range">Full range</a>
+        {%- endif -%}
+      </div>
+
+      <div class="fcol">
+        <h5>{{ section.settings.col3_heading | default: "Help" }}</h5>
+        {%- if section.settings.col3_menu != blank -%}
+          {%- for link in linklists[section.settings.col3_menu].links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="#combos">Bundle builder</a>
+          <a href="#signup">Offers</a>
+          <a href="#footer">Contact us</a>
+          <a href="#footer">Shipping &amp; returns</a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="fbot">
+      <p>&copy; {{ 'now' | date: "%Y" }} {{ section.settings.copyright_text | default: "Purelane. Clean, simply." }}</p>
+      <div style="display:flex;gap:14px">
+        <a href="#top" style="color:var(--paper-3);text-decoration:none">Privacy</a>
+        <a href="#top" style="color:var(--paper-3);text-decoration:none">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "section",
+  "class": "section-purelane-footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name",
+      "default": "Purelane"
+    },
+    {
+      "type": "text",
+      "id": "brand_tagline",
+      "label": "Brand Tagline",
+      "default": "Clean, simply"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_bio",
+      "label": "Brand Description",
+      "default": "Effective cleaning, powered by nature. Made for Indian homes since day one."
+    },
+    {
+      "type": "text",
+      "id": "col1_heading",
+      "label": "Column 1 Heading",
+      "default": "Shop"
+    },
+    {
+      "type": "link_list",
+      "id": "col1_menu",
+      "label": "Column 1 Menu"
+    },
+    {
+      "type": "text",
+      "id": "col2_heading",
+      "label": "Column 2 Heading",
+      "default": "About"
+    },
+    {
+      "type": "link_list",
+      "id": "col2_menu",
+      "label": "Column 2 Menu"
+    },
+    {
+      "type": "text",
+      "id": "col3_heading",
+      "label": "Column 3 Heading",
+      "default": "Help"
+    },
+    {
+      "type": "link_list",
+      "id": "col3_menu",
+      "label": "Column 3 Menu"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "Purelane. Clean, simply."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

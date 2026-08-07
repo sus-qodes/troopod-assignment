@@ -385,6 +385,190 @@
         "combo_4",
         "combo_5"
       ]
+    },
+    "purelane_bundles": {
+      "type": "purelane-bundles",
+      "settings": {
+        "kicker": "Build your bundle",
+        "heading": "One box. Every room.",
+        "description": "Mix and match across kitchen, laundry, home and skin. One flat price, no code needed, free shipping either way."
+      },
+      "blocks": {
+        "tier_1": {
+          "type": "tier_card",
+          "settings": {
+            "tag": "Starter",
+            "qty": "2",
+            "qty_unit": "Products",
+            "price": "₹349",
+            "compare_at_price": "₹598",
+            "per_product_note": "Flat ₹174 per product",
+            "bullet_1": "Pick any two products",
+            "bullet_2": "Free shipping across India",
+            "class_1": "p-tap",
+            "class_2": "p-kitchen"
+          }
+        },
+        "tier_2": {
+          "type": "tier_card",
+          "settings": {
+            "is_featured": true,
+            "tag": "Most popular",
+            "qty": "3",
+            "qty_unit": "Products",
+            "price": "₹499",
+            "compare_at_price": "₹897",
+            "per_product_note": "Flat ₹166 per product",
+            "bullet_1": "Pick any three products",
+            "bullet_2": "Covers kitchen and laundry",
+            "bullet_3": "Free shipping across India",
+            "class_1": "p-kitchen",
+            "class_2": "p-tap",
+            "class_3": "p-dish"
+          }
+        },
+        "tier_3": {
+          "type": "tier_card",
+          "settings": {
+            "is_five": true,
+            "tag": "Whole home",
+            "qty": "5",
+            "qty_unit": "Products",
+            "price": "₹799",
+            "compare_at_price": "₹1495",
+            "per_product_note": "Flat ₹160 per product",
+            "bullet_1": "Pick any five products",
+            "bullet_2": "Every room in one order",
+            "bullet_3": "Free shipping across India",
+            "class_1": "p-kitchen",
+            "class_2": "p-tap",
+            "class_3": "p-floor",
+            "class_4": "p-toilet",
+            "class_5": "p-laundry"
+          }
+        }
+      },
+      "block_order": [
+        "tier_1",
+        "tier_2",
+        "tier_3"
+      ]
+    },
+    "purelane_shop": {
+      "type": "purelane-shop",
+      "settings": {
+        "kicker": "Bestsellers",
+        "heading": "Loved by 30,000 homes",
+        "range_kicker": "The full range",
+        "range_heading": "Every room, one shelf",
+        "range_description": "Floors, taps, kitchen, laundry, bathroom and hands. Fourteen plant-based formulas that replace every harsh bottle under your sink.",
+        "wb_kicker": "The smarter way to shop",
+        "wb_heading": "Why bundles beat buying single",
+        "cats_kicker": "Bundle categories",
+        "cats_heading": "Find the right bundle for you"
+      },
+      "blocks": {
+        "card_1": {
+          "type": "product_card",
+          "settings": {
+            "badge": "Best seller",
+            "title": "Tap cleaner & limescale remover",
+            "reviews": "237 reviews",
+            "price": "₹200",
+            "compare_price": "₹299",
+            "discount_tag": "33% off",
+            "class": "p-tap"
+          }
+        },
+        "card_2": {
+          "type": "product_card",
+          "settings": {
+            "badge": "Best seller",
+            "title": "Kitchen cleaner, foaming",
+            "reviews": "254 reviews",
+            "price": "₹200",
+            "compare_price": "₹299",
+            "discount_tag": "33% off",
+            "class": "p-kitchen"
+          }
+        },
+        "card_3": {
+          "type": "product_card",
+          "settings": {
+            "badge": "Top rated",
+            "title": "Copper, bronze & brass cleaner",
+            "reviews": "231 reviews",
+            "price": "₹200",
+            "compare_price": "₹299",
+            "discount_tag": "33% off",
+            "class": "p-metal"
+          }
+        },
+        "card_4": {
+          "type": "product_card",
+          "settings": {
+            "badge": "New",
+            "title": "Washing machine cleaner & descaler",
+            "reviews": "183 reviews",
+            "price": "₹200",
+            "compare_price": "₹299",
+            "discount_tag": "33% off",
+            "class": "p-wm"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ]
+    },
+    "purelane_trust": {
+      "type": "purelane-trust",
+      "blocks": {
+        "trust_1": { "type": "trust_item", "settings": { "text": "Plant derived formulas" } },
+        "trust_2": { "type": "trust_item", "settings": { "text": "Recyclable packaging" } },
+        "trust_3": { "type": "trust_item", "settings": { "text": "Safe for kids & pets" } },
+        "trust_4": { "type": "trust_item", "settings": { "text": "Made in India" } }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4"
+      ]
+    },
+    "purelane_signup": {
+      "type": "purelane-signup",
+      "settings": {
+        "kicker": "Join the Purelane Club",
+        "heading": "Get ₹100 off your first bundle",
+        "description": "Plus first access to new launches and restocks.",
+        "placeholder": "your@email.com",
+        "button_label": "Get my ₹100 off"
+      }
+    },
+    "purelane_footer": {
+      "type": "purelane-footer",
+      "settings": {
+        "brand_name": "Purelane",
+        "brand_tagline": "Clean, simply",
+        "brand_bio": "Effective cleaning, powered by nature. Made for Indian homes since day one.",
+        "col1_heading": "Shop",
+        "col2_heading": "About",
+        "col3_heading": "Help",
+        "copyright_text": "Purelane. Clean, simply."
+      }
+    },
+    "purelane_sticky_cta": {
+      "type": "purelane-sticky-cta",
+      "settings": {
+        "title": "Build your box",
+        "subtitle": "Flat prices, free shipping",
+        "btn_label": "Shop now",
+        "btn_link": "#combos"
+      }
     }
   },
   "order": [
@@ -394,6 +578,12 @@
     "purelane_review_marquee",
     "purelane_ingredients",
     "purelane_why_it_works",
-    "purelane_combos"
+    "purelane_combos",
+    "purelane_bundles",
+    "purelane_shop",
+    "purelane_trust",
+    "purelane_signup",
+    "purelane_footer",
+    "purelane_sticky_cta"
   ]
 }
