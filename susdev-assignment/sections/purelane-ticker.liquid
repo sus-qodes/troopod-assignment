@@ -1,0 +1,134 @@
+{%- comment -%}
+  Purelane — Announcement Ticker Section
+  Horizontally scrolling promo ticker bar.
+{%- endcomment -%}
+
+{%- style -%}
+  .ticker {
+    position: relative;
+    z-index: 40;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    background: rgba(23,16,43,.62);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(236,230,247,.10);
+    color: var(--paper-2);
+  }
+  .ticker .track {
+    display: inline-flex;
+    gap: 40px;
+    padding: 9px 20px;
+    animation: tick {{ section.settings.speed | default: 30 }}s linear infinite;
+  }
+  .ticker b {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  @keyframes tick {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+{%- endstyle -%}
+
+<div class="ticker" aria-hidden="true" {{ section.shopify_attributes }}>
+  <div class="track">
+    {%- if section.blocks.size > 0 -%}
+      {%- comment -%} Render blocks twice for seamless infinite marquee loop {%- endcomment -%}
+      {%- for i in (1..2) -%}
+        {%- for block in section.blocks -%}
+          <span {{ block.shopify_attributes }}>
+            {{ block.settings.text }} <b>{{ block.settings.highlight_text }}</b>
+          </span>
+        {%- endfor -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- comment -%} Default fallback if no blocks configured {%- endcomment -%}
+      {%- for i in (1..2) -%}
+        <span>Free shipping <b>on every bundle across India</b></span>
+        <span>100% plant-based <b>and non-toxic</b></span>
+        <span>Loved by <b>30,000+ happy homes</b></span>
+        <span>Buy 3 <b>at flat ₹499</b></span>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Ticker",
+  "tag": "section",
+  "class": "section-announcement-ticker",
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Marquee Speed",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ticker_item",
+      "name": "Ticker Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free shipping"
+        },
+        {
+          "type": "text",
+          "id": "highlight_text",
+          "label": "Highlighted Text (Amber)",
+          "default": "on every bundle across India"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Ticker",
+      "blocks": [
+        {
+          "type": "ticker_item",
+          "settings": {
+            "text": "Free shipping",
+            "highlight_text": "on every bundle across India"
+          }
+        },
+        {
+          "type": "ticker_item",
+          "settings": {
+            "text": "100% plant-based",
+            "highlight_text": "and non-toxic"
+          }
+        },
+        {
+          "type": "ticker_item",
+          "settings": {
+            "text": "Loved by",
+            "highlight_text": "30,000+ happy homes"
+          }
+        },
+        {
+          "type": "ticker_item",
+          "settings": {
+            "text": "Buy 3",
+            "highlight_text": "at flat ₹499"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
