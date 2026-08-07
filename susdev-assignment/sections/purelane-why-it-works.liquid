@@ -108,12 +108,15 @@
                   {%- assign rot_title = "Kitchen cleaner" -%}
                 {%- endif -%}
 
-                {%- if block.settings.image != blank -%}
-                  <img class="pimg custom-rot-img{% if forloop.first %} on{% endif %}" src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ rot_title | escape }}" data-name="{{ rot_title }}" data-note="{{ block.settings.subtitle }}" width="196" height="196" {{ block.shopify_attributes }}>
-                {%- elsif block.settings.product != blank and block.settings.product.featured_image != blank -%}
-                  <img class="pimg custom-rot-img{% if forloop.first %} on{% endif %}" src="{{ block.settings.product.featured_image | image_url: width: 400 }}" alt="{{ rot_title | escape }}" data-name="{{ rot_title }}" data-note="{{ block.settings.subtitle }}" width="196" height="196" {{ block.shopify_attributes }}>
+                {%- assign rot_img = block.settings.image -%}
+                {%- if rot_img == blank and block.settings.product != blank -%}
+                  {%- assign rot_img = block.settings.product.featured_image -%}
+                {%- endif -%}
+
+                {%- if rot_img != blank -%}
+                  <img class="pimg custom-rot-img{% if forloop.first %} on{% endif %}" src="{{ rot_img | image_url: width: 400 }}" alt="{{ rot_title | escape }}" data-name="{{ rot_title | escape }}" data-note="{{ block.settings.subtitle | escape }}" width="196" height="196" {{ block.shopify_attributes }}>
                 {%- else -%}
-                  <span class="pimg {{ block.settings.product_class | default: 'p-kitchen' }}{% if forloop.first %} on{% endif %}" role="img" aria-label="{{ rot_title | escape }}" data-name="{{ rot_title }}" data-note="{{ block.settings.subtitle }}" {{ block.shopify_attributes }}></span>
+                  <span class="pimg {{ block.settings.product_class | default: 'p-kitchen' }}{% if forloop.first %} on{% endif %}" role="img" aria-label="{{ rot_title | escape }}" data-name="{{ rot_title | escape }}" data-note="{{ block.settings.subtitle | escape }}" {{ block.shopify_attributes }}></span>
                 {%- endif -%}
               {%- endfor -%}
             {%- else -%}

@@ -274,72 +274,117 @@
         "stat_4"
       ]
     },
-    "image_banner": {
-      "type": "image-banner",
+    "purelane_combos": {
+      "type": "purelane-combos",
+      "settings": {
+        "kicker": "Pre-built to save you money",
+        "heading": "Best selling combos",
+        "description": "Swipe through the boxes people order most. Each one is already priced below buying the same products on their own.",
+        "fine_print": "Inclusive of all taxes · COD available",
+        "swipe_cue": "Swipe for more combos",
+        "rail_note": "Tapping 'Shop bundle' opens the bundle picker with these products already added. You can still swap anything before you pay."
+      },
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "combo_1": {
+          "type": "combo_card",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "title": "Kitchen essentials",
+            "products_count_text": "3 products",
+            "description": "Includes: Foaming Kitchen Cleaner, Dishwash Gel & Tap Cleaner. Everything for a sparkling kitchen, no need to pick separately.",
+            "price": "₹499",
+            "compare_at_price": "₹897",
+            "save_badge": "Save ₹398",
+            "saving_text": "You save ₹398",
+            "badge_text": "Most popular",
+            "subtitle_1": "Cuts grease instantly",
+            "class_1": "p-kitchen",
+            "subtitle_2": "Squeaky clean dishes",
+            "class_2": "p-dish",
+            "subtitle_3": "Melts hard water stains",
+            "class_3": "p-tap"
           }
         },
-        "button": {
-          "type": "buttons",
+        "combo_2": {
+          "type": "combo_card",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "title": "Laundry care bundle",
+            "products_count_text": "3 products",
+            "description": "Includes: Laundry Detergent, Fabric Conditioner & Machine Cleaner Powder. Softer, fresher wash, all in one box.",
+            "price": "₹499",
+            "compare_at_price": "₹947",
+            "save_badge": "Save ₹448",
+            "saving_text": "You save ₹448",
+            "subtitle_1": "Removes tough stains & odour",
+            "class_1": "p-laundry",
+            "show_tile_2": true,
+            "subtitle_2": "Softens & freshens every wash",
+            "subtitle_3": "Deep-cleans your machine",
+            "class_3": "p-wm"
+          }
+        },
+        "combo_3": {
+          "type": "combo_card",
+          "settings": {
+            "is_featured": true,
+            "title": "Complete home bundle",
+            "products_count_text": "5 products",
+            "description": "Includes: Kitchen Cleaner, Laundry Detergent, Floor Cleaner, Toilet Cleaner & Handwash. Our biggest saving box.",
+            "price": "₹799",
+            "compare_at_price": "₹1,495",
+            "save_badge": "Save ₹696",
+            "saving_text": "Biggest saving",
+            "badge_text": "Best value",
+            "subtitle_1": "Cuts grease instantly",
+            "class_1": "p-kitchen",
+            "subtitle_2": "Kills 99.9% germs",
+            "class_2": "p-floor",
+            "subtitle_3": "Gentle hydration for hands",
+            "class_3": "p-handwash"
+          }
+        },
+        "combo_4": {
+          "type": "combo_card",
+          "settings": {
+            "title": "Bathroom deep clean",
+            "products_count_text": "3 products",
+            "description": "Includes: Toilet Cleaner, Tap Cleaner & Magic Eraser. A complete bathroom refresh in one box.",
+            "price": "₹499",
+            "compare_at_price": "₹897",
+            "save_badge": "Save ₹398",
+            "saving_text": "You save ₹398",
+            "subtitle_1": "Kills 99.9% germs",
+            "class_1": "p-toilet",
+            "subtitle_2": "Melts hard water stains",
+            "class_2": "p-tap",
+            "subtitle_3": "Scrubs away soap scum",
+            "class_3": "p-eraser"
+          }
+        },
+        "combo_5": {
+          "type": "combo_card",
+          "settings": {
+            "title": "Hard water solution kit",
+            "products_count_text": "2 products",
+            "description": "Includes: Tap Cleaner & Toilet Cleaner. A quick, focused fix for hard water stains across the home.",
+            "price": "₹349",
+            "compare_at_price": "₹598",
+            "save_badge": "Save ₹249",
+            "saving_text": "You save ₹249",
+            "subtitle_1": "Melts hard water stains",
+            "class_1": "p-tap",
+            "subtitle_2": "Fights limescale in the bowl",
+            "class_2": "p-toilet",
+            "class_3": "none"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
-      ],
-      "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
-      }
+        "combo_1",
+        "combo_2",
+        "combo_3",
+        "combo_4",
+        "combo_5"
+      ]
     }
   },
   "order": [
@@ -349,7 +394,6 @@
     "purelane_review_marquee",
     "purelane_ingredients",
     "purelane_why_it_works",
-    "image_banner",
-    "featured_collection"
+    "purelane_combos"
   ]
 }
