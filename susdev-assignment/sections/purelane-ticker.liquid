@@ -13,10 +13,10 @@
     font-weight: 600;
     letter-spacing: .1em;
     text-transform: uppercase;
-    background: rgba(23,16,43,.62);
+    background: rgba(255,255,255,.74);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(236,230,247,.10);
+    border-bottom: 1px solid rgba(75,58,143,.12);
     color: var(--paper-2);
   }
   .ticker .track {
@@ -26,7 +26,7 @@
     animation: tick {{ section.settings.speed | default: 30 }}s linear infinite;
   }
   .ticker b {
-    color: var(--accent);
+    color: #4f7d10;
     font-weight: 700;
   }
   @keyframes tick {
@@ -89,7 +89,7 @@
         {
           "type": "text",
           "id": "highlight_text",
-          "label": "Highlighted Text (Amber)",
+          "label": "Highlighted Text (Green)",
           "default": "on every bundle across India"
         }
       ]
