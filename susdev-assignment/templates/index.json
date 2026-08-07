@@ -50,6 +50,19 @@
         "menu": "main-menu"
       }
     },
+    "purelane_hero": {
+      "type": "purelane-hero",
+      "settings": {
+        "heading_line_1": "Clean",
+        "heading_line_2": "That",
+        "heading_accent": "Lasts",
+        "lede": "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it.",
+        "primary_btn_label": "Shop now",
+        "primary_btn_link": "#shop",
+        "secondary_btn_label": "How it works",
+        "secondary_btn_link": "#how"
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -121,6 +134,7 @@
   "order": [
     "purelane_ticker",
     "purelane_header",
+    "purelane_hero",
     "image_banner",
     "featured_collection"
   ]

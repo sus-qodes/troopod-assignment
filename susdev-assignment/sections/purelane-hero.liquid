@@ -1,0 +1,695 @@
+{%- comment -%}
+  Purelane — Hero Section
+  Full-viewport hero with headline, badges, lede, CTAs, mobile badgestrip,
+  and 3-stage animated hero product rotator.
+  Displays the 1st image of each listed product (or selected image asset),
+  constrained neatly within the right corner container.
+{%- endcomment -%}
+
+{%- style -%}
+  .hero {
+    position: relative;
+    z-index: 2;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    padding: 150px 0 var(--sec-y);
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(102deg,rgba(255,255,255,.80) 0%,rgba(255,255,255,.50) 30%,rgba(255,255,255,.12) 54%,transparent 68%);
+  }
+  @media(max-width:900px) {
+    .hero::before {
+      background: linear-gradient(180deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.34) 36%,rgba(255,255,255,.66) 100%);
+    }
+  }
+  .hero-grid {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 18px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-copy {
+    max-width: 580px;
+    position: relative;
+    z-index: 3;
+  }
+  .hero h1 {
+    margin-bottom: 20px;
+    text-shadow: none;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 11px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+  }
+  .hero-prod {
+    position: absolute;
+    right: 2%;
+    bottom: 28px;
+    width: min(44vw, 480px);
+    max-width: 480px;
+    z-index: 2;
+    filter: drop-shadow(0 14px 22px rgba(0,74,66,.15));
+  }
+  .badges {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 96px;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 8px;
+    border-radius: 20px;
+  }
+  .badge {
+    text-align: center;
+    padding: 11px 4px;
+  }
+  .badge+.badge {
+    border-top: 1px solid rgba(75,58,143,.12);
+  }
+  .badge .bi {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 8px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255,255,255,.62);
+    border: 1px solid rgba(75,58,143,.16);
+    color: #4f7d10;
+  }
+  .badge .bi svg {
+    width: 19px;
+    height: 19px;
+  }
+  .badge span {
+    display: block;
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--paper-2);
+    line-height: 1.34;
+  }
+  .badgestrip {
+    display: flex;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .badgestrip div {
+    flex: 1;
+    text-align: center;
+    padding: 11px 6px;
+    border-radius: 14px;
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--paper-2);
+    line-height: 1.3;
+  }
+  .badgestrip svg {
+    width: 18px;
+    height: 18px;
+    margin: 0 auto 6px;
+    color: #4f7d10;
+  }
+  .hstage {
+    position: relative;
+    width: 100%;
+    height: clamp(320px, 60svh, 540px);
+  }
+  .hslide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-right: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .85s var(--ease);
+  }
+  .hslide.on {
+    opacity: 1;
+  }
+  .hp {
+    position: relative;
+    width: auto;
+    max-width: 60%;
+    max-height: 100%;
+    flex: 0 0 auto;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: contain;
+    opacity: 0;
+    transform: translateY(28px) scale(.94);
+    transition: opacity .8s var(--ease), transform .8s var(--ease);
+    filter: drop-shadow(0 14px 22px rgba(0,74,66,.15));
+  }
+  .hslide.on .hp {
+    opacity: 1;
+    transform: none;
+  }
+  .hslide.on .hp.d1 { transition-delay: .06s; }
+  .hslide.on .hp.d2 { transition-delay: .30s; }
+  .hslide.on .hp.d3 { transition-delay: .54s; }
+
+  /* Slide 1: 1 product */
+  .hs1 .a { height: 92%; max-width: 70%; z-index: 3; }
+
+  /* Slide 2: 2 products scaled to stay in right corner */
+  .hs2 .a { height: 68%; max-width: 44%; margin-right: -12%; z-index: 1; }
+  .hs2 .b { height: 84%; max-width: 50%; z-index: 3; }
+
+  /* Slide 3: 3 products scaled to stay in right corner */
+  .hs3 .a { height: 62%; max-width: 36%; margin-right: -10%; z-index: 1; order: 1; }
+  .hs3 .c { height: 84%; max-width: 44%; z-index: 3; order: 2; }
+  .hs3 .b { height: 66%; max-width: 38%; margin-left: -10%; z-index: 2; order: 3; }
+
+  .ptag {
+    position: absolute;
+    left: 0;
+    bottom: 2%;
+    z-index: 6;
+    padding: 11px 14px 12px;
+    border-radius: 16px;
+    max-width: 52%;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .8s var(--ease) .62s, transform .8s var(--ease) .62s;
+  }
+  .hslide.on .ptag {
+    opacity: 1;
+    transform: none;
+  }
+  .ptag .lbl {
+    display: block;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .ptag .val {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    margin-top: 5px;
+  }
+  .ptag .val strong {
+    font-family: 'Outfit', sans-serif;
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    color: var(--surface);
+    line-height: 1;
+  }
+  .ptag .val s {
+    font-size: 12px;
+    color: var(--paper-3);
+  }
+  .ptag .cut {
+    display: inline-block;
+    margin-top: 7px;
+    font-size: 8.4px;
+    font-weight: 800;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(201,118,29,.16);
+    border: 1px solid rgba(201,118,29,.36);
+    color: #4f7d10;
+  }
+  .hdots {
+    display: flex;
+    gap: 7px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+  }
+  .hdots button {
+    width: 6px;
+    height: 6px;
+    padding: 0;
+    border-radius: 50%;
+    background: rgba(75,58,143,.22);
+    transition: .4s var(--ease);
+  }
+  .hdots button.on {
+    background: #b8701c;
+    width: 20px;
+    border-radius: 999px;
+  }
+  .hdots button:hover {
+    background: rgba(75,58,143,.4);
+  }
+
+  @media(max-width:1200px) {
+    .hero-copy { max-width: 440px; }
+    .hero-prod { width: min(40vw, 400px); right: 2%; }
+    .hstage { height: clamp(280px, 50svh, 440px); }
+  }
+  @media(max-width:900px) {
+    .hero { align-items: flex-end; padding-top: 132px; }
+    .hero-copy { max-width: none; }
+    .hero-prod { position: relative; right: auto; bottom: auto; width: min(84vw, 360px); margin: 20px auto 0; }
+    .badges { display: none; }
+    .hstage { height: clamp(260px, 40svh, 360px); }
+    .ptag { padding: 9px 12px 10px; border-radius: 14px; max-width: 65%; }
+    .ptag .val strong { font-size: 20px; }
+  }
+  @media(min-width:901px) {
+    .badgestrip { display: none; }
+  }
+{%- endstyle -%}
+
+<section class="hero" data-scene="1" {{ section.shopify_attributes }}>
+  <div class="hero-grid">
+
+    <div class="badges glass-2" aria-label="Product promises">
+      <div class="badge">
+        <span class="bi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/><path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/></svg>
+        </span>
+        <span>Plant<br>powered</span>
+      </div>
+      <div class="badge">
+        <span class="bi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v6.2c0 4.3 3.1 7.6 7.5 8.8 4.4-1.2 7.5-4.5 7.5-8.8V6L12 3Z"/><path d="m9 12 2.2 2.2L15.4 10"/></svg>
+        </span>
+        <span>Safe for<br>kids &amp; pets</span>
+      </div>
+      <div class="badge">
+        <span class="bi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.4"/><path d="M6.4 17.6 17.6 6.4"/></svg>
+        </span>
+        <span>Zero harsh<br>chemicals</span>
+      </div>
+    </div>
+
+    <div class="hero-copy">
+      <h1 class="d1 rv in">
+        {{ section.settings.heading_line_1 | default: "Clean" }}<br>
+        {{ section.settings.heading_line_2 | default: "That" }}<br>
+        <span class="lime">{{ section.settings.heading_accent | default: "Lasts" }}</span>
+      </h1>
+      <div class="rule rv rv-d1">
+        <i></i>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/><path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/></svg>
+        <i></i>
+      </div>
+      <p class="lede rv rv-d2">
+        {{ section.settings.lede | default: "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it." }}
+      </p>
+      <div class="hero-cta rv rv-d3">
+        <a class="btn btn-primary" href="{{ section.settings.primary_btn_link | default: "#shop" }}">
+          {{ section.settings.primary_btn_label | default: "Shop now" }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="{{ section.settings.secondary_btn_link | default: "#how" }}">
+          {{ section.settings.secondary_btn_label | default: "How it works" }}
+        </a>
+      </div>
+
+      <div class="badgestrip rv rv-d4">
+        <div class="glass-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/><path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/></svg>
+          Plant powered
+        </div>
+        <div class="glass-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v6.2c0 4.3 3.1 7.6 7.5 8.8 4.4-1.2 7.5-4.5 7.5-8.8V6L12 3Z"/><path d="m9 12 2.2 2.2L15.4 10"/></svg>
+          Kids &amp; pet safe
+        </div>
+        <div class="glass-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.4"/><path d="M6.4 17.6 17.6 6.4"/></svg>
+          Zero harsh chem
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-prod" id="heroProd">
+      <div class="hstage" id="hstage">
+
+        {%- comment -%} Slide 1: 1 product {%- endcomment -%}
+        {%- assign prod1 = section.settings.slide_1_product -%}
+        {%- assign img1 = section.settings.slide_1_image | default: prod1.featured_image | default: prod1.images.first -%}
+        <div class="hslide hs1 on" data-n="1">
+          {%- if img1 != blank -%}
+            <span class="hp a d1" role="img" aria-label="{{ prod1.title | default: 'Purelane foaming kitchen cleaner' | escape }}"
+              style="background-image: url('{{ img1 | image_url: width: 800 }}'); aspect-ratio: {{ img1.aspect_ratio | default: 0.3229 }};"></span>
+          {%- else -%}
+            <span class="hp p-kbtl a d1" role="img" aria-label="Purelane foaming kitchen cleaner spray bottle"></span>
+          {%- endif -%}
+          <div class="glass-2 ptag">
+            <span class="lbl">{{ section.settings.slide_1_tag | default: "Single bottle" }}</span>
+            <span class="val">
+              <strong>{% if prod1 != blank %}{{ prod1.price | money_without_trailing_zeros }}{% else %}₹200{% endif %}</strong>
+              <s>{% if prod1.compare_at_price > prod1.price %}{{ prod1.compare_at_price | money_without_trailing_zeros }}{% else %}₹299{% endif %}</s>
+            </span>
+            <span class="cut">{{ section.settings.slide_1_cut | default: "33% off" }}</span>
+          </div>
+        </div>
+
+        {%- comment -%} Slide 2: 2 products {%- endcomment -%}
+        {%- assign prod2a = section.settings.slide_2_product_a -%}
+        {%- assign prod2b = section.settings.slide_2_product_b -%}
+        {%- assign img2a = section.settings.slide_2_image_a | default: prod2a.featured_image | default: prod2a.images.first -%}
+        {%- assign img2b = section.settings.slide_2_image_b | default: prod2b.featured_image | default: prod2b.images.first -%}
+        <div class="hslide hs2" data-n="2">
+          {%- if img2a != blank -%}
+            <span class="hp a d1" role="img" aria-label="{{ prod2a.title | default: 'Purelane tap cleaner' | escape }}"
+              style="background-image: url('{{ img2a | image_url: width: 800 }}'); aspect-ratio: {{ img2a.aspect_ratio | default: 0.322 }};"></span>
+          {%- else -%}
+            <span class="hp p-tbtl a d1" role="img" aria-label="Purelane tap cleaner spray bottle"></span>
+          {%- endif -%}
+
+          {%- if img2b != blank -%}
+            <span class="hp b d2" role="img" aria-label="{{ prod2b.title | default: 'Purelane kitchen cleaner' | escape }}"
+              style="background-image: url('{{ img2b | image_url: width: 800 }}'); aspect-ratio: {{ img2b.aspect_ratio | default: 0.3229 }};"></span>
+          {%- else -%}
+            <span class="hp p-kbtl b d2" role="img" aria-label="Purelane kitchen cleaner spray bottle"></span>
+          {%- endif -%}
+
+          <div class="glass-2 ptag">
+            <span class="lbl">{{ section.settings.slide_2_tag | default: "Any 2 products" }}</span>
+            <span class="val">
+              <strong>{{ section.settings.slide_2_price | default: "₹349" }}</strong>
+              <s>{{ section.settings.slide_2_compare_price | default: "₹598" }}</s>
+            </span>
+            <span class="cut">{{ section.settings.slide_2_cut | default: "Save ₹249" }}</span>
+          </div>
+        </div>
+
+        {%- comment -%} Slide 3: 3 products {%- endcomment -%}
+        {%- assign prod3a = section.settings.slide_3_product_a -%}
+        {%- assign prod3b = section.settings.slide_3_product_b -%}
+        {%- assign prod3c = section.settings.slide_3_product_c -%}
+        {%- assign img3a = section.settings.slide_3_image_a | default: prod3a.featured_image | default: prod3a.images.first -%}
+        {%- assign img3b = section.settings.slide_3_image_b | default: prod3b.featured_image | default: prod3b.images.first -%}
+        {%- assign img3c = section.settings.slide_3_image_c | default: prod3c.featured_image | default: prod3c.images.first -%}
+        <div class="hslide hs3" data-n="3">
+          {%- if img3a != blank -%}
+            <span class="hp a d1" role="img" aria-label="{{ prod3a.title | default: 'Purelane tap cleaner' | escape }}"
+              style="background-image: url('{{ img3a | image_url: width: 800 }}'); aspect-ratio: {{ img3a.aspect_ratio | default: 0.322 }};"></span>
+          {%- else -%}
+            <span class="hp p-tbtl a d1" role="img" aria-label="Purelane tap cleaner spray bottle"></span>
+          {%- endif -%}
+
+          {%- if img3b != blank -%}
+            <span class="hp b d2" role="img" aria-label="{{ prod3b.title | default: 'Purelane copper cleaner' | escape }}"
+              style="background-image: url('{{ img3b | image_url: width: 800 }}'); aspect-ratio: {{ img3b.aspect_ratio | default: 0.3416 }};"></span>
+          {%- else -%}
+            <span class="hp p-mbtl b d2" role="img" aria-label="Purelane copper cleaner pump bottle"></span>
+          {%- endif -%}
+
+          {%- if img3c != blank -%}
+            <span class="hp c d3" role="img" aria-label="{{ prod3c.title | default: 'Purelane kitchen cleaner' | escape }}"
+              style="background-image: url('{{ img3c | image_url: width: 800 }}'); aspect-ratio: {{ img3c.aspect_ratio | default: 0.3229 }};"></span>
+          {%- else -%}
+            <span class="hp p-kbtl c d3" role="img" aria-label="Purelane kitchen cleaner spray bottle"></span>
+          {%- endif -%}
+
+          <div class="glass-2 ptag">
+            <span class="lbl">{{ section.settings.slide_3_tag | default: "Any 3 products" }}</span>
+            <span class="val">
+              <strong>{{ section.settings.slide_3_price | default: "₹499" }}</strong>
+              <s>{{ section.settings.slide_3_compare_price | default: "₹897" }}</s>
+            </span>
+            <span class="cut">{{ section.settings.slide_3_cut | default: "Save ₹398" }}</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="hdots" id="hdots">
+        <button type="button" class="on" aria-label="Show 1 product"></button>
+        <button type="button" class="" aria-label="Show 2 products"></button>
+        <button type="button" class="" aria-label="Show 3 products"></button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  (function() {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var prod = document.getElementById('heroProd');
+    var hstage = document.getElementById('hstage');
+
+    /* Ambient drift animation */
+    if (!reduce && prod && typeof prod.animate === 'function') {
+      prod.animate(
+        [{ filter: 'drop-shadow(0 14px 22px rgba(0,74,66,.15))' },
+         { filter: 'drop-shadow(0 22px 32px rgba(0,74,66,.22))' },
+         { filter: 'drop-shadow(0 14px 22px rgba(0,74,66,.15))' }],
+        { duration: 7000, iterations: Infinity, easing: 'ease-in-out' }
+      );
+    }
+
+    /* Hero stage rotator (1 -> 2 -> 3 products) */
+    if (hstage) {
+      var hs = [].slice.call(hstage.querySelectorAll('.hslide'));
+      var hd = [].slice.call(document.querySelectorAll('#hdots button'));
+      var hi = 0, htimer = null;
+
+      function hgo(n) {
+        hi = (n + hs.length) % hs.length;
+        hs.forEach(function (s, i) { s.classList.toggle('on', i === hi); });
+        hd.forEach(function (d, i) { d.classList.toggle('on', i === hi); });
+      }
+
+      function hplay() {
+        if (!htimer && !reduce) {
+          htimer = setInterval(function () { hgo(hi + 1); }, 3800);
+        }
+      }
+
+      function hstop() {
+        if (htimer) { clearInterval(htimer); htimer = null; }
+      }
+
+      hd.forEach(function (d, i) {
+        d.addEventListener('click', function () { hstop(); hgo(i); hplay(); });
+      });
+
+      hstage.addEventListener('mouseenter', hstop);
+      hstage.addEventListener('mouseleave', hplay);
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) {
+          es.forEach(function (e) { e.isIntersecting ? hplay() : hstop(); });
+        }, { threshold: 0.2 }).observe(hstage);
+      } else {
+        hplay();
+      }
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Purelane Hero",
+  "tag": "section",
+  "class": "section-purelane-hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading Line 1",
+      "default": "Clean"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading Line 2",
+      "default": "That"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading Accent Word (Amber)",
+      "default": "Lasts"
+    },
+    {
+      "type": "textarea",
+      "id": "lede",
+      "label": "Lead Text",
+      "default": "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it."
+    },
+    {
+      "type": "text",
+      "id": "primary_btn_label",
+      "label": "Primary Button Label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "primary_btn_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_btn_label",
+      "label": "Secondary Button Label",
+      "default": "How it works"
+    },
+    {
+      "type": "url",
+      "id": "secondary_btn_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Slide 1 (Single Product)"
+    },
+    {
+      "type": "product",
+      "id": "slide_1_product",
+      "label": "Product 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_1_image",
+      "label": "Product 1 Image (Override 1st Image)"
+    },
+    {
+      "type": "text",
+      "id": "slide_1_tag",
+      "label": "Tag Label",
+      "default": "Single bottle"
+    },
+    {
+      "type": "text",
+      "id": "slide_1_cut",
+      "label": "Discount Tag",
+      "default": "33% off"
+    },
+    {
+      "type": "header",
+      "content": "Slide 2 (Two Products)"
+    },
+    {
+      "type": "product",
+      "id": "slide_2_product_a",
+      "label": "Product A"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_2_image_a",
+      "label": "Product A Image (Override 1st Image)"
+    },
+    {
+      "type": "product",
+      "id": "slide_2_product_b",
+      "label": "Product B"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_2_image_b",
+      "label": "Product B Image (Override 1st Image)"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_tag",
+      "label": "Tag Label",
+      "default": "Any 2 products"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_price",
+      "label": "Display Price",
+      "default": "₹349"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_compare_price",
+      "label": "Compare Price",
+      "default": "₹598"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_cut",
+      "label": "Discount Tag",
+      "default": "Save ₹249"
+    },
+    {
+      "type": "header",
+      "content": "Slide 3 (Three Products)"
+    },
+    {
+      "type": "product",
+      "id": "slide_3_product_a",
+      "label": "Product A"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_3_image_a",
+      "label": "Product A Image (Override 1st Image)"
+    },
+    {
+      "type": "product",
+      "id": "slide_3_product_b",
+      "label": "Product B"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_3_image_b",
+      "label": "Product B Image (Override 1st Image)"
+    },
+    {
+      "type": "product",
+      "id": "slide_3_product_c",
+      "label": "Product C"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_3_image_c",
+      "label": "Product C Image (Override 1st Image)"
+    },
+    {
+      "type": "text",
+      "id": "slide_3_tag",
+      "label": "Tag Label",
+      "default": "Any 3 products"
+    },
+    {
+      "type": "text",
+      "id": "slide_3_price",
+      "label": "Display Price",
+      "default": "₹499"
+    },
+    {
+      "type": "text",
+      "id": "slide_3_compare_price",
+      "label": "Compare Price",
+      "default": "₹897"
+    },
+    {
+      "type": "text",
+      "id": "slide_3_cut",
+      "label": "Discount Tag",
+      "default": "Save ₹398"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Hero"
+    }
+  ]
+}
+{% endschema %}
