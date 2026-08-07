@@ -1,0 +1,12 @@
+# Ignore everything by default at root
+/*
+
+# Track gitignore and README
+!.gitignore
+!README.md
+!README
+
+# Track specified files and directories
+!purelane-homepage.html
+!susdev-assignment/
+!susdev-assignment/**
